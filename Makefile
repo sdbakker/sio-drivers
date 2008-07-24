@@ -9,7 +9,7 @@ KERNELRELEASE := $(shell if [ -r $(VERFILE) ]; \
 	else uname -r; fi)
 KERNELVER := $(shell echo "$(KERNELRELEASE)" | \
 	sed "s/\([0-9]*\.[0-9]*\.[0-9]*\).*/\1/")
-MODPATH := $(DESTDIR)/lib/modules/$(KERNELRELEASE)
+INSTALL_MOD_PATH := $(DESTDIR)/lib/modules/$(KERNELRELEASE)
 
 all: modules
 
@@ -19,8 +19,8 @@ modules:
 	modules
 
 modules_install:
-	mkdir -p $(MODPATH)/kernel/drivers/sios
-	cp $(MSRC)/*.ko $(MODPATH)/kernel/drivers/sios
+	mkdir -p $(INSTALL_MOD_PATH)/kernel/drivers/sios
+	cp $(MSRC)/*.ko $(INSTALL_MOD_PATH)/kernel/drivers/sios
 
 uninstall:
 	find $(MODPATH) -name "sios" | xargs rm -rf
